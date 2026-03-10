@@ -1,0 +1,10 @@
+# API framework
+# Note: uses pydantic for data validation
+fastapi==0.111.0
+
+# Web server that runs FastAPI
+uvicorn==0.29.0
+
+# PostgreSQL driver
+# -binary = use precompiled version so no C compiler needed
+psycopg2-binary==2.9.9

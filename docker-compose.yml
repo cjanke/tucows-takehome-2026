@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16
+    environment: # TODO: decide if want to do .env file
+      POSTGRES_USER: graph_user
+      POSTGRES_PASSWORD: graph_pass
+      POSTGRES_DB: graph_db
+    ports:
+      - "5432:5432"   # Postgres default port, expose to local machine to enable debugging
+    volumes:
+      # mounts db/schema.sql file in docker directory so it auto-runs on first start
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck: # poll "is postgres ready" every 5 seconds
+      test: ["CMD-SHELL", "pg_isready -U graph_user -d graph_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://graph_user:graph_pass@db:5432/graph_db
+    depends_on:
+      db:
+        condition: service_healthy  # waits for Postgres to be ready before starting
