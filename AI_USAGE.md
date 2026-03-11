@@ -92,3 +92,13 @@ claude gave large "parse_graph" function that I broke into smaller functions
 I also added type hints.
 
 found bug in graphs.py, also slightly cleaned up claude's solution
+
+improved claude's test_graph to make tests more specific (check against exact output vs. "len of paths == 3")
+
+Also added tests to parser for:
+invalid file (missing closing xml tag)
+and all other validation checks
+
+
+Asked Claude to add tests for cycles / self loops
+

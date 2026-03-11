@@ -13,3 +13,4 @@ Using xml.etree.ElementTree for xml parsing library - it's available by default 
 
 the parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
 
+`pytest tests/ -v`  to run tests

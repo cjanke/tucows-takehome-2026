@@ -10,17 +10,16 @@ EDGES = [
 
 def test_build_adjacency_list():
     adjacency = build_adjacency_list(EDGES)
-    assert "a" in adjacency
-    assert "e" not in adjacency  # e has no outgoing edges
-    assert len(adjacency["a"]) == 3
+    assert adjacency == {
+        'a': [('b', 1.0), ('c', 5.0), ('e', 10.0)],
+        'b': [('e', 2.0)],
+        'c': [('e', 1.0)]
+    }
 
 def test_find_all_paths():
     adjacency = build_adjacency_list(EDGES)
     paths = find_all_paths(adjacency, "a", "e")
-    assert len(paths) == 3
-    assert ["a", "e"] in paths
-    assert ["a", "b", "e"] in paths
-    assert ["a", "c", "e"] in paths
+    assert paths == [['a', 'b', 'e'], ['a', 'c', 'e'], ['a', 'e']]
 
 def test_find_all_paths_no_path():
     adjacency = build_adjacency_list(EDGES)
@@ -46,3 +45,25 @@ def test_cheapest_path_direct():
     adjacency = build_adjacency_list(edges)
     path = find_cheapest_path(adjacency, "a", "b")
     assert path == ["a", "b"]
+
+def test_find_all_paths_self_loop():
+    # Self loop on a should not cause infinite recursion
+    edges = [
+        {"from": "a", "to": "a", "cost": 0.0},
+        {"from": "a", "to": "b", "cost": 1.0},
+    ]
+    adjacency = build_adjacency_list(edges)
+    paths = find_all_paths(adjacency, "a", "b")
+    assert paths == [["a", "b"]]
+
+def test_find_all_paths_cycle():
+    # a -> b -> c -> a cycle should not cause infinite recursion
+    edges = [
+        {"from": "a", "to": "b", "cost": 1.0},
+        {"from": "b", "to": "c", "cost": 1.0},
+        {"from": "c", "to": "a", "cost": 1.0},
+        {"from": "a", "to": "e", "cost": 5.0},
+    ]
+    adjacency = build_adjacency_list(edges)
+    paths = find_all_paths(adjacency, "a", "e")
+    assert paths == [["a", "e"]]

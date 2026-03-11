@@ -1,0 +1,15 @@
+<graph>
+    <id>g1</id>
+    <name>Missing nodes graph</name>
+    <nodes>
+        <!-- No nodes -->
+    </nodes>
+    <edges>
+        <node>
+            <id>e1</id>
+            <from>a</from>
+            <to>b</to>
+            <cost>1.0</cost>
+        </node>
+    </edges>
+</graph>
