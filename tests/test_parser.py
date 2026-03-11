@@ -49,4 +49,13 @@ def test_edge_must_reference_nodes():
       parse_graph("sample/invalid_bad_edge_graph.xml")
 
 def test_edge_only_single_to_node():
-   parse_graph("sample/invalid_multiple_tos_graph.xml")
+    with pytest.raises(GraphParseError, match="Edge 'e1' has 2 <to> tags"):
+      parse_graph("sample/invalid_multiple_tos_graph.xml")
+
+def test_invalid_edge_cost():
+    with pytest.raises(GraphParseError, match="Edge 'e1' has invalid cost: 'abc'"):
+      parse_graph("sample/invalid_edge_cost_graph.xml")
+
+def test_negative_edge_cost():
+    with pytest.raises(GraphParseError, match="Edge 'e1' has negative cost"):
+      parse_graph("sample/negative_edge_cost_graph.xml")

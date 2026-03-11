@@ -74,6 +74,14 @@ def _parse_edges(root: ET.Element, nodes: dict[str, dict[str, str]]) -> list[dic
 
     for edge_el in edges_el.findall("node"):
         edge_id = _require(edge_el, "id", "<edge>")
+
+        num_from_tags = len(edge_el.findall("from"))
+        num_to_tags = len(edge_el.findall("to"))
+        if num_from_tags != 1:
+            raise GraphParseError(f"Edge '{edge_id}' has {num_from_tags} <from> tags")
+        if num_to_tags != 1:
+            raise GraphParseError(f"Edge '{edge_id}' has {num_to_tags} <to> tags")
+
         from_node = _require(edge_el, "from", f"<edge id='{edge_id}'>")
         to_node = _require(edge_el, "to", f"<edge id='{edge_id}'>")
 
