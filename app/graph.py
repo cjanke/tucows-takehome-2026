@@ -34,14 +34,15 @@ def find_all_paths(
     visited.add(start)
     current_path.append(start)
 
-    if start == end:
-        return [current_path.copy()]
-
     paths = []
-    for neighbour, _ in adjacency.get(start, []): # what happens if no neighbors in adjacency? test case?
-        if neighbour not in visited:
-            new_paths = find_all_paths(adjacency, neighbour, end, visited, current_path)
-            paths.extend(new_paths)
+
+    if start == end:
+        paths.append(current_path.copy())
+    else:
+        for neighbor, _ in adjacency.get(start, []):
+            if neighbor not in visited:
+                new_paths = find_all_paths(adjacency, neighbor, end, visited, current_path)
+                paths.extend(new_paths)
 
     # Backtrack
     current_path.pop()

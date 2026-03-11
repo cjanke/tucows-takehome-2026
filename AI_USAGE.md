@@ -91,3 +91,4 @@ asked claude if we should handle errors besides ET parsing error, claude agreed 
 claude gave large "parse_graph" function that I broke into smaller functions
 I also added type hints.
 
+found bug in graphs.py, also slightly cleaned up claude's solution
