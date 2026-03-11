@@ -1,0 +1,14 @@
+<graph>
+    <id>g1</id>
+    <name>No Edge Graph</name>
+    <nodes>
+        <node>
+            <id>a</id>
+            <name>A name</name>
+        </node>
+        <node>
+            <id>b</id>
+            <name>B name</name>
+        </node>
+    </nodes>
+</graph>

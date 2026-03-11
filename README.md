@@ -13,3 +13,7 @@ Using xml.etree.ElementTree for xml parsing library - it's available by default 
 
 the parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
 
+`pytest tests/ -v`  to run tests
+
+In case we want to support querying multiple graphs in the future, we store graphs in their own table and include graph ids in the records for nodes and edges. The API, though, assumes only one graph.
+

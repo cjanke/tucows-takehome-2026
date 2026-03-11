@@ -1,0 +1,22 @@
+<graph>
+    <id>g1</id>
+    <name>Duplicate Node IDs Graph</name>
+    <nodes>
+        <node>
+            <id>a</id>
+            <name>A name</name>
+        </node>
+        <node>
+            <id>a</id> <!-- Duplicate node id -->
+            <name>Another A name</name>
+        </node>
+    </nodes>
+    <edges>
+        <node>
+            <id>e1</id>
+            <from>a</from>
+            <to>b</to>
+            <cost>1.0</cost>
+        </node>
+    </edges>
+</graph>
