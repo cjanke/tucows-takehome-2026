@@ -8,3 +8,6 @@ uvicorn==0.29.0
 # PostgreSQL driver
 # -binary = use precompiled version so no C compiler needed
 psycopg2-binary==2.9.9
+
+# testing library
+pytest==8.1.1
