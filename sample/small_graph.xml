@@ -1,0 +1,23 @@
+<!-- Two nodes and an edge -->
+<graph>
+    <id>g1</id>
+    <name>Simple Graph</name>
+    <nodes>
+        <node>
+            <id>a</id>
+            <name>A name</name>
+        </node>
+        <node>
+            <id>b</id>
+            <name>B name</name>
+        </node>
+    </nodes>
+    <edges>
+        <node>
+            <id>e1</id>
+            <from>a</from>
+            <to>b</to>
+            <cost>1.0</cost>
+        </node>
+    </edges>
+</graph>

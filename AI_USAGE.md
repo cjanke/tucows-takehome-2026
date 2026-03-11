@@ -68,3 +68,24 @@ Shall we start with the Docker + requirements setup? It's mostly mechanical but 
 "Claude initially suggested explicitly including Pydantic in requirements.txt (it's used by fast api) but I pushed back and we removed it since we don't use it directly."
 
 Adding my own comments to dockerfile, requirements.txt, etc because I haven't set up too many projects with docker and I'm learning.
+
+
+# schema.sql
+
+
+Want to start with db/schema.sql? This is one of the more interesting parts of the challenge — we need to think carefully about how to represent a graph (nodes, edges, costs) in a relational database in a clean, normalized way. 😄
+
+Sure! My first thought on how to represent a graph in a db would be like  a table where each row represents an edge, column 1 = first point, column2 = 2nd point, and column3 = weight / cost. maybe also a separate table for a complete list of nodes. if it's a bidirectional edge have two row entries. And then indices for looking up based on first column, etc. what do you think?
+
+
+Your instinct is really good and honestly close to what I'd suggest! The edge list representation is the standard way to store graphs in a relational database.
+
+Asked Claude and decided to skip adding named CONSTRAINT to edges table.
+
+
+database.py
+Claude's initial code had a redundant import, I caught and removed it.
+
+parser.py
+asked claude if we should handle errors besides ET parsing error, claude agreed and said "file not found" is good one to add
+claude gave large "parse_graph" function that I broke into smaller functions

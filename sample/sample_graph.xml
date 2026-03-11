@@ -1,0 +1,76 @@
+<!--
+  Covers the following cases:
+   - edge with no cost defaults to 0.0 (e7)
+   - three paths from a->e to test path queries
+   - node with no path to another node (a-/->d)
+   - self loop on e7 a->a
+-->
+<graph>
+    <id>g0</id>
+    <name>The Graph Name</name>
+    <nodes>
+        <node>
+            <id>a</id>
+            <name>A name</name>
+        </node>
+        <node>
+            <id>b</id>
+            <name>B name</name>
+        </node>
+        <node>
+            <id>c</id>
+            <name>C name</name>
+        </node>
+        <node>
+            <id>d</id>
+            <name>D name</name>
+        </node>
+        <node>
+            <id>e</id>
+            <name>E name</name>
+        </node>
+    </nodes>
+    <edges>
+        <node>
+            <id>e1</id>
+            <from>a</from>
+            <to>b</to>
+            <cost>1.0</cost>
+        </node>
+        <node>
+            <id>e2</id>
+            <from>b</from>
+            <to>e</to>
+            <cost>2.0</cost>
+        </node>
+        <node>
+            <id>e3</id>
+            <from>a</from>
+            <to>c</to>
+            <cost>5.0</cost>
+        </node>
+        <node>
+            <id>e4</id>
+            <from>c</from>
+            <to>e</to>
+            <cost>1.0</cost>
+        </node>
+        <node>
+            <id>e5</id>
+            <from>a</from>
+            <to>e</to>
+            <cost>10.0</cost>
+        </node>
+        <node>
+            <id>e6</id>
+            <from>d</from>
+            <to>e</to>
+            <cost>1.0</cost>
+        </node>
+        <node>
+            <id>e7</id>
+            <from>a</from>
+            <to>a</to>
+        </node>
+    </edges>
+</graph>
