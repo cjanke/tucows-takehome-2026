@@ -5,6 +5,11 @@ print("Testing simple graph...")
 result = parse_graph("sample/small_graph.xml")
 print(result)
 
+# Test no edges graph
+print("\nTesting no edges graph...")
+result = parse_graph("sample/no_edges.xml")
+print(result)
+
 # Test full graph
 print("\nTesting full graph...")
 result = parse_graph("sample/sample_graph.xml")

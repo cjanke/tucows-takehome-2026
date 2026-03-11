@@ -89,3 +89,5 @@ Claude's initial code had a redundant import, I caught and removed it.
 parser.py
 asked claude if we should handle errors besides ET parsing error, claude agreed and said "file not found" is good one to add
 claude gave large "parse_graph" function that I broke into smaller functions
+I also added type hints.
+
