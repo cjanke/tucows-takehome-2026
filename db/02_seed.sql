@@ -20,5 +20,7 @@ INSERT INTO edges (id, graph_id, from_node, to_node, cost) VALUES
     ('e6', 'g0', 'd', 'e', 1.0),
     ('e7', 'g0', 'a', 'a', 0.0);
 
+-- CYCLE DETECTION CASE
+-- Uncomment the below lines to test cycle detection
 INSERT INTO edges (id, graph_id, from_node, to_node, cost)
 VALUES ('e8', 'g0', 'e', 'a', 1.0);
