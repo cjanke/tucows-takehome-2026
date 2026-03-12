@@ -40,7 +40,7 @@ def _parse_nodes(root: ET.Element) -> dict[str, dict[str, str]]:
     """
     Parse and validate graph nodes from ET root element.
     Returns a dictionary of mappings from node_id => {node_id, node_name}
-    Raises GraphParseError if there are any duplicate node ids
+    Raises GraphParseError if there are no nodes or any duplicate node ids
     """
     nodes_el = root.find("nodes")
     if nodes_el is None or len(nodes_el) == 0:
