@@ -57,16 +57,18 @@ A standalone SQL query for detecting cycles in a graph is provided in `db/cycle_
 
 To test it:
 1. Temporarily insert a cycle into the seed data:
-
+```
     INSERT INTO edges (id, graph_id, from_node, to_node, cost)
     VALUES ('e8', 'g0', 'e', 'a', 1.0);
+```
 
   Note: these lines are already present in db/seed.sql (see very bottom of file), commented out for easy testing.
 
 2. Rebuild the project
-
+```
     docker compose down -v
     docker compose up --build
+```
 
 3. Connect to the database using preferred tool, eg TablePlus
 
