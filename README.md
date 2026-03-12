@@ -8,7 +8,7 @@
 
 # How to run the program
 
-The app is built within a Docker container.
+The app is built within a Docker container. Basic seed data for the db (see `db/02_seed.sql`) is handled automatically.
 For the initial build, run `docker compose up --build` in your terminal at the root directory.
 
 For subsequent builds, wipe the existing data before running:
@@ -119,6 +119,8 @@ The graph is modeled across three tables in PostgreSQL:
 See `db/01_schema.sql` for full definitions and inline commentary.
 
 # Design decisions and commentary
+
+Normally credentials would be stored in a .env file and NOT in plain text in `docker-compose.yml`, but since this is a toy problem we're doing plain text for ease of testing for everyone.
 
 After seeking input from Claude, I decided to use `xml.etree.ElementTree` for the XML parsing library - it's available by default for python, and the XML we'll be working with is simple and predictable.
 

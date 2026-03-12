@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16
-    environment: # TODO: decide if want to do .env file
+    environment: # NOTE: normally credentials should go in a .env file and not here!!
       POSTGRES_USER: graph_user
       POSTGRES_PASSWORD: graph_pass
       POSTGRES_DB: graph_db
