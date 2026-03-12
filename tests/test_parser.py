@@ -58,4 +58,4 @@ def test_invalid_edge_cost():
 
 def test_negative_edge_cost():
     with pytest.raises(GraphParseError, match="Edge 'e1' has negative cost"):
-      parse_graph("sample/negative_edge_cost_graph.xml")
+      parse_graph("sample/invalid_negative_edge_cost_graph.xml")

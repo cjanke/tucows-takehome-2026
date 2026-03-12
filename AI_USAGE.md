@@ -102,3 +102,4 @@ and all other validation checks
 
 Asked Claude to add tests for cycles / self loops
 
+Identified bug in allowing multiple to/from edge tags
