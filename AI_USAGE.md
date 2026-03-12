@@ -105,3 +105,8 @@ Asked Claude to add tests for cycles / self loops
 Identified bug in allowing multiple to/from edge tags, corrected.
 
 Asked Claude to help provide seed data for docker.
+
+
+write an SQL query (SQL99 or PL/pgSQL) that finds cycles in a given graph
+according to your schema.
+Claude did this and I read over it carefully / took notes because I hadn't used the RECURSIVE sql keyword before so I learned a lot

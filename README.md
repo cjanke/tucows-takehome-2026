@@ -9,13 +9,7 @@ docker compose version
 Docker version 24.0.6, build ed223bc
 Docker Compose version v2.22.0-desktop.2
 
-Using xml.etree.ElementTree for xml parsing library - it's available by default in python, and the xml is pretty similar and predictable.
-
-the parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
-
 `pytest tests/ -v`  to run tests
-
-In case we want to support querying multiple graphs in the future, we store graphs in their own table and include graph ids in the records for nodes and edges. The API, though, assumes only one graph.
 
 docker compose down -v
 docker compose up --build
@@ -44,3 +38,39 @@ Alternatively, you can visit http://localhost:8000/docs and call the query from 
   ]
 }
 ```
+
+Using xml.etree.ElementTree for xml parsing library - it's available by default in python, and the xml is pretty similar and predictable.
+
+the parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
+
+
+
+In case we want to support querying multiple graphs in the future, we store graphs in their own table and include graph ids in the records for nodes and edges. The API, though, assumes only one graph.
+
+Propose a normalized SQL schema to model these graphs in PostgreSQL
+using standard SQL data types only. Briefly explain each attribute and relationship, inline comments are fine.
+
+
+## Cycle Detection
+
+A standalone SQL query for detecting cycles in a graph is provided in `db/cycle_detection.sql`.
+
+To test it:
+1. Temporarily insert a cycle into the seed data:
+
+    INSERT INTO edges (id, graph_id, from_node, to_node, cost)
+    VALUES ('e8', 'g0', 'e', 'a', 1.0);
+
+2. Rebuild the project
+
+    docker compose down -v
+    docker compose up --build
+
+3. Connect to the database using preferred tool, eg TablePlus
+
+4. Run the query on the database
+
+
+
+
+
