@@ -132,6 +132,8 @@ The Pydantic query models are defined in main.py for simplicity given the single
 
 The parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
 
+The current implementation loads all edges into memory and builds an adjacency list in Python rather than querying the database per traversal step. This is appropriate for small graphs but for large graphs a more selective query using the index on (graph_id, from_node) would be more efficient.
+
 We use depth-first search to find all paths, since it's well-suited to that and more space efficient than BFS.
 
 For cheapest path, Dijkstra's algorithm is the standard solution and it works fine for our case because we don't have to worry about negative edge weights (in which case we would use the Bellman-Ford algorithm).
