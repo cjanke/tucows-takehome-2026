@@ -26,5 +26,5 @@ CREATE TABLE edges (
     FOREIGN KEY (to_node, graph_id)   REFERENCES nodes(id, graph_id)
 );
 
--- Index for fast lookup of edges by their starting node (used in path queries)
+-- Index for fast lookup of edges by their starting node (used for cycle detection sql)
 CREATE INDEX idx_edges_from ON edges(graph_id, from_node);
