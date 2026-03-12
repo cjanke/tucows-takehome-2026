@@ -7,6 +7,7 @@ Throughout the project, I used Claude to assist. I started by feeding in the pdf
     - I haven't set up many Docker projects from scratch, so I added comments and took a lot of notes for myself for the future as well.
 - Proposed my idea for how to handle the db schema (see below) to Claude before letting Claude write it out.
     - My proposal: "My first thought on how to represent a graph in a db would be like a table where each row represents an edge, column 1 = first point, column2 = 2nd point, and column3 = weight / cost. maybe also a separate table for a complete list of nodes. And then indices for looking up based on first column, etc. what do you think?"
+    - Claude also originally proposed having graphs in their own table, which seemed like a good idea at the time - after re-reading the spec later, I realized we didn't need to handle the case where multiple graphs are being uploaded. I decided to leave the table as is since it's more flexible for the future, but removed Claude's unnecessary references to it in the API and later SQL query.
 - For each step of coding, I started with Claude writing out the bulk of it before reviewing it thoroughly, adding my own comments, and asking about adding tests. Notable details:
     - Found a bug in `find_all_paths` where it was only returning the first path it found.
         - For Claude's v1, if a path was found and start == end, it called `return [current_path.copy()]`.

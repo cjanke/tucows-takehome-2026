@@ -1,4 +1,6 @@
 -- Stores the top-level graph metadata
+-- Note: this table is not really necessary if we're only working with one graph,
+-- but could be useful if the app is extended to support multiple graphs in the future.
 CREATE TABLE graphs (
     id   TEXT PRIMARY KEY,  -- from <id> in XML e.g. "g0"
     name TEXT NOT NULL      -- from <name> in XML e.g. "The Graph Name"
