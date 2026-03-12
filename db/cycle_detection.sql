@@ -5,11 +5,6 @@ WITH RECURSIVE cycle_search AS (
         e.from_node AS start_node,
         e.to_node AS current_node,
         ARRAY[e.from_node] AS visited, -- track visited nodes to avoid infinite loops
-        CASE                                    -- keep log of nodes in path to output at end
-            WHEN e.to_node = e.from_node
-            THEN ARRAY[e.from_node, e.to_node]
-            ELSE ARRAY[]::text[]                -- initialize empty text array to hold path
-        END AS cycle_path,
         e.to_node = e.from_node AS cycle_found  -- handle edge case to detect self loops
     FROM edges e
 
@@ -20,20 +15,17 @@ WITH RECURSIVE cycle_search AS (
         cs.graph_id,
         cs.start_node,
         e.to_node AS current_node,
-        cs.visited || e.from_node,  -- append from node to list of those visited
-        CASE
-            WHEN e.to_node = cs.start_node  -- if the next node is the start node, we've found a cycle
-            THEN cs.visited || e.from_node || e.to_node  -- append last nodes to list visited to complete the cycle path
-            ELSE ARRAY[]::text[]
-        END AS cycle_path,
-        e.to_node = cs.start_node AS cycle_found
+        cs.visited || e.from_node,                -- append from_node to list of those visited
+        e.to_node = cs.start_node AS cycle_found  -- stop if we're back at the start node => cycle
     FROM edges e
     JOIN cycle_search cs
         ON e.graph_id = cs.graph_id
         AND e.from_node = cs.current_node
     WHERE NOT cs.cycle_found
-        AND NOT (e.from_node = ANY(cs.visited))
+        AND NOT (e.from_node = ANY(cs.visited)) -- infinite loop check
 )
-SELECT DISTINCT start_node, cycle_path
+-- Note: graph_id is omitted from results as the API assumes a single graph at a time.
+-- To support multiple graphs, add graph_id to the SELECT and WHERE clauses.
+SELECT DISTINCT start_node, visited || current_node AS cycle_path -- append current node to visited list then output as cycle path
 FROM cycle_search
 WHERE cycle_found;
