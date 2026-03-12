@@ -17,3 +17,30 @@ the parser assumes one graph per XML file per the spec, but could be extended to
 
 In case we want to support querying multiple graphs in the future, we store graphs in their own table and include graph ids in the records for nodes and edges. The API, though, assumes only one graph.
 
+docker compose down -v
+docker compose up --build
+
+You can test the queries by using curl in the command line, eg:
+
+```
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "queries": [
+      { "paths": { "start": "a", "end": "e" } },
+      { "cheapest": { "start": "a", "end": "e" } },
+      { "cheapest": { "start": "a", "end": "h" } }
+    ]
+  }'
+```
+
+Alternatively, you can visit http://localhost:8000/docs and call the query from the UI there:
+```
+{
+  "queries": [
+    { "paths": { "start": "a", "end": "e" } },
+    { "cheapest": { "start": "a", "end": "e" } },
+    { "cheapest": { "start": "a", "end": "h" } }
+  ]
+}
+```
