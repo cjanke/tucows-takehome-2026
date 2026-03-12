@@ -18,6 +18,8 @@ class CheapestQuery(BaseModel):
     end: str
 
 class Query(BaseModel):
+    # Each query is either a paths query or a cheapest query, never both.
+    # We model both as optional fields since JSON doesn't natively express union types.
     paths: PathQuery | None = None
     cheapest: CheapestQuery | None = None
 

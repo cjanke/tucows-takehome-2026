@@ -8,8 +8,9 @@ services:
     ports:
       - "5432:5432"   # Postgres default port, expose to local machine to enable debugging
     volumes:
-      # mounts db/schema.sql file in docker directory so it auto-runs on first start
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # mounts db/ schema sql files in docker directory so it auto-runs on first start
+      - ./db/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./db/02_seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
     healthcheck: # poll "is postgres ready" every 5 seconds
       test: ["CMD-SHELL", "pg_isready -U graph_user -d graph_db"]
       interval: 5s

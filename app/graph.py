@@ -50,8 +50,6 @@ def find_all_paths(
 
     return paths
 
-# TODO: if we already did "find all paths" could we use that to speed this up?
-# Or cache results for a given graph?
 def find_cheapest_path(
     adjacency: dict[str, list[tuple[str, float]]],
     start: str,
