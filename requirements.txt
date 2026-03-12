@@ -11,3 +11,6 @@ psycopg2-binary==2.9.9
 
 # testing library
 pytest==8.1.1
+
+# Data validation and request parsing
+pydantic==2.7.1
