@@ -9,7 +9,7 @@
 # How to run the program
 
 The app is built within a Docker container.
-For the initial build, run `docker compose down -v` in your terminal at the root directory:
+For the initial build, run `docker compose up --build` in your terminal at the root directory:
 
 For subsequent builds, wipe the existing data before running:
 
@@ -84,6 +84,39 @@ To test it:
 | b | {b,e,a,b} |
 | c | {c,e,a,c} |
 
+# Project Structure
+```
+<tucows-takehome-2026/
+├── app/
+│   ├── database.py       # PostgreSQL connection pool
+│   ├── graph.py          # Path-finding algorithms (DFS, Dijkstra)
+│   ├── main.py           # FastAPI app, Pydantic models, and /query endpoint
+│   └── parser.py         # XML parsing and validation
+├── db/
+│   ├── 01_schema.sql        # Table definitions
+│   ├── 02_seed.sql          # Sample graph data
+│   └── cycle_detection.sql  # Standalone cycle detection query
+├── sample/
+│   ├── sample_graph.xml  # Full sample graph for testing
+│   ├── simple_graph.xml  # Minimal two-node graph
+│   └── ...               # Invalid graphs for parser error testing
+├── tests/
+│   ├── test_graph.py     # Unit tests for path-finding algorithms
+│   └── test_parser.py    # Unit tests for XML parser
+├── docker-compose.yml    # Defines API and PostgreSQL services
+├── Dockerfile            # Python API container definition
+└── requirements.txt      # Python dependencies
+```
+
+# Schema
+
+The graph is modeled across three tables in PostgreSQL:
+- `graphs` — stores graph metadata (id, name)
+    - Note - not necessary for this version of the API, but good to have for the future if functionality is expanded to handle multiple graphs.
+- `nodes` — stores nodes, each belonging to a graph via foreign key
+- `edges` — stores directed edges between nodes, with an optional cost defaulting to 0
+
+See `db/01_schema.sql` for full definitions and inline commentary.
 
 # Design decisions and commentary
 
