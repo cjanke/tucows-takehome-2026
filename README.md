@@ -9,7 +9,7 @@
 # How to run the program
 
 The app is built within a Docker container.
-For the initial build, run `docker compose up --build` in your terminal at the root directory:
+For the initial build, run `docker compose up --build` in your terminal at the root directory.
 
 For subsequent builds, wipe the existing data before running:
 
@@ -133,16 +133,4 @@ We use depth-first search to find all paths, since it's well-suited to that and 
 For cheapest path, Dijkstra's algorithm is the standard solution and it works fine for our case because we don't have to worry about negative edge weights (in which case we would use the Bellman-Ford algorithm).
 
 In case we want to support querying multiple graphs in the future, we store graphs in their own table and include reference graph ids in the records for nodes and edges. The API, though, assumes only one graph for simplicity.
-
-
-
-TODO:
-Propose a normalized SQL schema to model these graphs in PostgreSQL
-using standard SQL data types only. Briefly explain each attribute and relationship, inline comments are fine.
-(I don't know how best to do this in the readme, if it should be done in the readme or just in the schema.sql, etc.)
-
-
-
-
-
 
