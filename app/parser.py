@@ -26,7 +26,7 @@ def parse_graph(filepath: str):
 
     root = tree.getroot()
 
-    # We assume one graph per XML file, as the spec defines <graph> as the root element.
+    # Assuming one graph per XML file, as the spec defines <graph> as the root element.
     # Multiple graphs would require a wrapper element like <graphs> which is not in the spec.
     graph_id = _require(root, "id", "<graph>")
     graph_name = _require(root, "name", "<graph>")
