@@ -1,4 +1,6 @@
 -- Stores the top-level graph metadata
+-- Note: this table is not really necessary if we're only working with one graph,
+-- but could be useful if the app is extended to support multiple graphs in the future.
 CREATE TABLE graphs (
     id   TEXT PRIMARY KEY,  -- from <id> in XML e.g. "g0"
     name TEXT NOT NULL      -- from <name> in XML e.g. "The Graph Name"
@@ -24,5 +26,5 @@ CREATE TABLE edges (
     FOREIGN KEY (to_node, graph_id)   REFERENCES nodes(id, graph_id)
 );
 
--- Index for fast lookup of edges by their starting node (used in path queries)
+-- Index for fast lookup of edges by their starting node (used for cycle detection sql)
 CREATE INDEX idx_edges_from ON edges(graph_id, from_node);

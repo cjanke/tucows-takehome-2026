@@ -1,6 +1,6 @@
 <graph>
     <id>g1</id>
-    <name>Simple Graph</name>
+    <name>Negative Edge Graph</name>
     <nodes>
         <node>
             <id>a</id>

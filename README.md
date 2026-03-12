@@ -8,7 +8,7 @@
 
 # How to run the program
 
-The app is built within a Docker container.
+The app is built within a Docker container. Basic seed data for the db (see `db/02_seed.sql`) is handled automatically.
 For the initial build, run `docker compose up --build` in your terminal at the root directory.
 
 For subsequent builds, wipe the existing data before running:
@@ -57,16 +57,18 @@ A standalone SQL query for detecting cycles in a graph is provided in `db/cycle_
 
 To test it:
 1. Temporarily insert a cycle into the seed data:
-
+```
     INSERT INTO edges (id, graph_id, from_node, to_node, cost)
     VALUES ('e8', 'g0', 'e', 'a', 1.0);
+```
 
   Note: these lines are already present in db/seed.sql (see very bottom of file), commented out for easy testing.
 
 2. Rebuild the project
-
+```
     docker compose down -v
     docker compose up --build
+```
 
 3. Connect to the database using preferred tool, eg TablePlus
 
@@ -120,6 +122,8 @@ See `db/01_schema.sql` for full definitions and inline commentary.
 
 # Design decisions and commentary
 
+Normally credentials would be stored in a .env file and NOT in plain text in `docker-compose.yml`, but since this is a toy problem we're doing plain text for ease of testing for everyone.
+
 After seeking input from Claude, I decided to use `xml.etree.ElementTree` for the XML parsing library - it's available by default for python, and the XML we'll be working with is simple and predictable.
 
 I'm not as familiar with python frameworks, so I also followed Claude's advice for using FastAPI as the API framework with Pydantic models that automatically parse the incoming JSON request body into Python objects and validate it. Upon independently researching both, they seem like popular options in the community and suitable for a simple project.
@@ -127,6 +131,8 @@ I'm not as familiar with python frameworks, so I also followed Claude's advice f
 The Pydantic query models are defined in main.py for simplicity given the single endpoint. If there were more models, they would go in a dedicated models.py file.
 
 The parser assumes one graph per XML file per the spec, but could be extended to support a wrapper element for multiple graphs.
+
+The current implementation loads all edges into memory and builds an adjacency list in Python rather than querying the database per traversal step. This is appropriate for small graphs but for large graphs a more selective query using the index on (graph_id, from_node) would be more efficient.
 
 We use depth-first search to find all paths, since it's well-suited to that and more space efficient than BFS.
 

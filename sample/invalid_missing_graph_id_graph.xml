@@ -1,7 +1,7 @@
 <!-- Two nodes and an edge -->
 <graph>
     <!-- No graph id -->
-    <name>Simple Graph</name>
+    <name>Invalid graph with no graph id</name>
     <nodes>
         <node>
             <id>a</id>
