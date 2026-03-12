@@ -110,3 +110,20 @@ Asked Claude to help provide seed data for docker.
 write an SQL query (SQL99 or PL/pgSQL) that finds cycles in a given graph
 according to your schema.
 Claude did this and I read over it carefully / took notes because I hadn't used the RECURSIVE sql keyword before so I learned a lot
+
+Claude initially only output the graph id and each node id from which you could reach a cycle, so I iterated further to have it only output nodes that are part of cycles, as well as the cycle path.
+
+Example output:
+| start_node | cycle_path |
+|------------|------------|
+| a | {a,b,e,a} |
+| a | {a,a} |
+| a | {a,e,a} |
+| e | {e,a,c,e} |
+| e | {e,a,e} |
+| a | {a,c,e,a} |
+| e | {e,a,b,e} |
+| b | {b,e,a,b} |
+| c | {c,e,a,c} |
+
+This also involved streamlining the query after I noticed we were tracking both nodes visited and the cycle_path, since they're tracking similar things.
